@@ -1,14 +1,3 @@
-# A Todo List demo App
-This is a todo list demo designed for CS411. 
-# Tutorial
-<iframe width="560" height="315" src="https://www.youtube.com/embed/sY1lLGe7ECA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-A comprehensive writeup is avaliable [here](https://tichung.com/blog/2021/20200323_flask/).
-
-## Requirements
-```
-python >= 3.5
-```
 
 ## Getting started
 ```bash
@@ -44,13 +33,3 @@ handlers:
 
 - url: /styles
   static_dir: static/styles
-```
-
-Setting up the deployment
-```bash
-curl https://sdk.cloud.google.com | bash
-gcloud components install app-engine-python
-gcloud config set project cs411-sp21
-gcloud auth login
-gcloud app deploy
-```

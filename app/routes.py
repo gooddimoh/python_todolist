@@ -1,4 +1,3 @@
-""" Specifies routing for the application"""
 from flask import render_template, request, jsonify
 from app import app
 from app import database as database
@@ -17,9 +16,7 @@ def delete(task_id):
 
 @app.route("/edit/<int:task_id>", methods=['POST'])
 def update(task_id):
-
     data = request.get_json()
-
     try:
         if "status" in data:
             database.update_status_entry(task_id, data["status"])
@@ -33,7 +30,6 @@ def update(task_id):
         result = {'success': False, 'response': 'Something went wrong'}
 
     return jsonify(result)
-
 
 @app.route("/create", methods=['POST'])
 def create():
