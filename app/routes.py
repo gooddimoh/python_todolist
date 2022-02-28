@@ -39,9 +39,14 @@ def create():
     result = {'success': True, 'response': 'Done'}
     return jsonify(result)
 
-
 @app.route("/")
 def homepage():
     """ returns rendered homepage """
     items = database.fetch_todo()
     return render_template("index.html", items=items)
+
+@app.route("/generate")
+def generate(user_id):
+    generator = database.generate(user_id)
+    for user in generator:
+        print(user)

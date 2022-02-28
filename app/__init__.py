@@ -1,11 +1,9 @@
-"""Setup at app startup"""
 import os
 import sqlalchemy
 from flask import Flask
 from yaml import load, Loader
 
 def init_connection_engine():
-
     if os.environ.get('GAE_ENV') != 'standard':
         try:
             variables = load(open("app.yaml"), Loader=Loader)
@@ -16,7 +14,6 @@ def init_connection_engine():
         env_variables = variables['env_variables']
         for var in env_variables:
             os.environ[var] = env_variables[var]
-
     pool = sqlalchemy.create_engine(
         sqlalchemy.engine.url.URL(
             drivername="mysql+pymysql",
@@ -26,7 +23,6 @@ def init_connection_engine():
             host=os.environ.get('MYSQL_HOST')
         )
     )
-
     return pool
 
 

@@ -1,7 +1,8 @@
 """Defines all the functions related to the database"""
 from app import db
 
-def fetch_todo() dict:
+
+def fetch_todo():
     conn = db.connect()
     query_results = conn.execute("Select * from tasks;").fetchall()
     conn.close()
@@ -16,22 +17,21 @@ def fetch_todo() dict:
     return todo_list
 
 
-def update_task_entry(task_id: int, text: str) -> None:
-
+def update_task_entry(task_id: int, text: str):
     conn = db.connect()
     query = 'Update tasks set task = "{}" where id = {};'.format(text, task_id)
     conn.execute(query)
     conn.close()
 
-def update_status_entry(task_id: int, text: str) -> None:
 
+def update_status_entry(task_id: int, text: str):
     conn = db.connect()
     query = 'Update tasks set status = "{}" where id = {};'.format(text, task_id)
     conn.execute(query)
     conn.close()
 
-def insert_new_task(text: str) ->  int:
 
+def insert_new_task(text: str):
     conn = db.connect()
     query = 'Insert Into tasks (task, status) VALUES ("{}", "{}");'.format(text, "Todo")
     conn.execute(query)
@@ -42,9 +42,17 @@ def insert_new_task(text: str) ->  int:
 
     return task_id
 
-def remove_task_by_id(task_id: int) -> None:
-    """ remove entries based on task ID """
+
+def remove_task_by_id(task_id: int):
     conn = db.connect()
     query = 'Delete From tasks where id={};'.format(task_id)
     conn.execute(query)
     conn.close()
+
+
+def generate(user_id: int):
+    mycursor = db.cursor()
+    sql = ("SELECT * FROM users INNER JOIN posts ON users.id = posts.id where user_id == %s",(user_id))
+    query1 = mycursor.execute(sql)
+    query1 = query1.fetchall()
+    return query1
